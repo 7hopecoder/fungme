@@ -25,6 +25,7 @@ const useStyles = makeStyles(theme => ({
 
     function handleLogout(){
       localStorage.removeItem('token')
+      localStorage.removeItem('userId')
       window.location.reload(false)
 
     }

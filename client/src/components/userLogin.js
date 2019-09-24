@@ -43,6 +43,7 @@ export default class UserLogin extends Component{
         .then(msgs => {
             if(msgs.token !== undefined){
                 localStorage.setItem('token',msgs.token)
+                localStorage.setItem('userId',msgs.userId)
                 this.props.onSuccessfulLogin()
             }else{
                 this.setState({

@@ -14,6 +14,15 @@ router.get('/', async(req,res) => {
     }    
 })
 
+router.get('/:id', async(req,res)=> {
+    try{
+        const users = await User.findById(req.params.id)
+        if(users) return res.send(users)
+    }catch(err){
+        res.status(400).send(err)
+    }
+})
+
 router.post('/register', async(req,res)=> {
     //validation of user registration
     const {error} = registerValidation(req.body)
@@ -34,7 +43,8 @@ router.post('/register', async(req,res)=> {
 
     try{
         const savedUser= await user.save()
-        res.send({'userId': savedUser})
+        const token = webToken.sign({_id:savedUser._id}, process.env.JWT_SECRET)
+        res.header('auth-token',token).send({'token':token,'userId':savedUser._id})  
     }catch(err){
         res.status(400).send(err);
     }
@@ -52,8 +62,18 @@ router.post('/login', async(req,res)=>{
     if(!validPwd) return res.send({'message':'invalid password'})
 
     const token = webToken.sign({_id:user._id}, process.env.JWT_SECRET)
-    res.header('auth-token',token).send({'token':token})
+    res.header('auth-token',token).send({'token':token,'userId':user._id})
 
+})
+
+router.post('/update/:id', async(req,res)=> {
+    try{   
+        const resp = await User.updateOne({_id:req.params.id},{$set: {highscore:req.body.highscore}})
+        if(resp.nModified == 1) return res.send({'message':'highscore updated successfully'})
+    }catch(err){
+        res.status(400).send(err);
+    }
+    
 })
 
 

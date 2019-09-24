@@ -1,20 +1,27 @@
 
 .gridarea{
     position : relative;
-    width: 500px;
-    height: 400px;
+    width: 510px;
+    height: 420px;
     border: 1px solid rgb(106, 212, 18);
     background-color: rgb(14, 13, 12); 
     margin: auto;
     box-shadow: 0px 0px 20px white;
     margin-top: 20px;
+  } 
+
+  .content{
+    margin: 0px;
+    width: 800px;
+    height: 550px;
+    padding-left: 300px;
   }
   
   .snakeframe{
     position: absolute;
     display: inline-block;
     border-radius: 35%;
-    border:1px solid rgb(0, 0, 0);
+    border:1px solid rgb(150, 245, 106);
     width: 3%;
     height: 3%; 
     background-color: rgb(2, 87, 2);
@@ -24,6 +31,9 @@
   .prey{
     position: absolute;
     display : inline-block;  
+    border-radius: 75%;
+    border:1px solid rgb(238, 217, 24);
+    background-color: rgb(212, 11, 4);
     width: 3%;
     height: 3%; 
     z-index: 1;  
@@ -62,6 +72,7 @@
   }
   
   .score{
+    margin-top : 2px;
     width: 30%;
   }
   

@@ -76,9 +76,10 @@ export default class UserRegister extends Component{
         })
         .then(response => response.json())
         .then(msgs => {
-            alert(JSON.stringify(msgs))
             if (msgs.userId !== undefined){
-                console.log(msgs.userId);
+                localStorage.setItem('token',msgs.token)
+                localStorage.setItem('userId',msgs.userId)
+                this.props.history.push(`/app/game`)
             }else{
                 this.setState({
                     errormsg:msgs.message
